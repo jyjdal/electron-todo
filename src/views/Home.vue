@@ -61,6 +61,7 @@
         width="98%"
         top="5vh"
         :model-value="dialogOpen"
+        :close-on-click-modal="false"
       >
         <el-input
           type="textarea"

@@ -19,7 +19,7 @@ function exportData(): void {
   sheet.addRow(["Id", "内容", "已完成", "提醒时间"]);
 
   // 添加数据
-  const todoList: TodoItem[] = db.get("todo").value();
+  const todoList: TodoItem[] = db.read().get("todo").value();
   let item: TodoItem;
   for (item of todoList) {
     sheet.addRow([
