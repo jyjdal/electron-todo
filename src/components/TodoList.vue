@@ -97,7 +97,7 @@ enum DialogType {
 }
 
 export default defineComponent({
-  name: "Home",
+  name: "TodoList",
   setup() {
     const store = useStore();
 
@@ -119,6 +119,9 @@ export default defineComponent({
 
     return { todoList, db, unfinished, finished, DialogType };
   },
+  mounted() {
+    this.updateList();
+  },
   data() {
     return {
       dialogTitle: "",
@@ -127,9 +130,6 @@ export default defineComponent({
       date: "",
       id: ""
     };
-  },
-  mounted() {
-    this.updateList();
   },
   methods: {
     updateList() {

@@ -5,14 +5,14 @@
     <el-divider style="border: 1px solid white"></el-divider>
     <div style="height: 280px;">
       <el-scrollbar style="height:100%">
-        <home></home>
+        <todo-list></todo-list>
       </el-scrollbar>
     </div>
   </div>
 </template>
 
 <script>
-import Home from "@/views/Home";
+import TodoList from "@/components/TodoList";
 import TitleBar from "@/components/TitleBar";
 import ToolBar from "@/components/ToolBar";
 
@@ -21,7 +21,7 @@ export default {
   components: {
     ToolBar,
     TitleBar,
-    Home
+    TodoList
   }
 };
 </script>
