@@ -57,6 +57,11 @@ async function createWindow() {
     await win.loadURL("app://./index.html");
   }
 
+  // 设置应用隐藏任务栏图标
+  win.on("show", () => {
+    win.setSkipTaskbar(true);
+  });
+
   setPosition(win);
   win.show();
 }
