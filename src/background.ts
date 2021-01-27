@@ -1,9 +1,10 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, screen, ipcMain } from "electron";
+import { app, protocol, BrowserWindow, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 
 import { exportData } from "@/utils/excel-util";
+import { setPosition } from "@/utils/init-extra";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -18,7 +19,7 @@ let win: BrowserWindow;
 if (app.requestSingleInstanceLock()) {
   // 防止IDE给出变量未使用的警告
   // noinspection JSUnusedLocalSymbols
-  app.on("second-instance", (event, commandLine, workingDirectory) => {
+  app.on("second-instance", () => {
     if (win) {
       setPosition(win);
     }
@@ -104,12 +105,6 @@ if (isDevelopment) {
   }
 }
 
-function setPosition(win: BrowserWindow) {
-  const size = screen.getPrimaryDisplay().workAreaSize;
-  const winSize = win.getSize();
-  win.setPosition(size.width - winSize[0] - 70, 70);
-}
-
 ipcMain.handle("setIgnoreMouseEvents", (event, ignore) => {
   // 使用ts开发时可能会出现Type Error: cannot read property 'xxx' of undefined
   // 因此需要在这里预先获取到主窗体BrowserWindow对象才能进行下一步的操作
@@ -122,10 +117,10 @@ ipcMain.handle("setIgnoreMouseEvents", (event, ignore) => {
   }
 });
 
-ipcMain.handle("exportData", event => {
+ipcMain.handle("exportData", () => {
   exportData();
 });
 
-ipcMain.handle("close", event => {
+ipcMain.handle("close", () => {
   app.exit(0);
 });

@@ -19,14 +19,19 @@ function exportData(): void {
   sheet.addRow(["Id", "内容", "已完成", "提醒时间"]);
 
   // 添加数据
-  const todoList: TodoItem[] = db.read().get("todo").value();
+  const todoList: TodoItem[] = db
+    .read()
+    .get("todo")
+    .value();
   let item: TodoItem;
   for (item of todoList) {
     sheet.addRow([
       item.id,
       item.content,
       item.finished ? "是" : "否",
-      item.remindTime === undefined ? "无" : item.remindTime.format("YYYY-MM-DD HH:mm:ss")
+      item.remindTime === undefined
+        ? "无"
+        : item.remindTime.format("YYYY-MM-DD HH:mm:ss")
     ]);
   }
 
@@ -41,7 +46,7 @@ function exportData(): void {
       body: `数据已导出到：安装目录/export/export-${dateStr}.xlsx`
     });
     // 因为对回调函数格式有要求，所以event参数必须存在
-    notification.on("click", event => {
+    notification.on("click", () => {
       shell.openExternal(exportFilePath).then();
     });
     notification.show();
