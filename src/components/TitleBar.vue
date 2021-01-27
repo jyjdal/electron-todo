@@ -6,20 +6,20 @@
   </div>
 </template>
 
-<script>
-import pkg from "../../package.json";
+<script lang="ts">
+import { name, version, author } from "../../package.json";
 
 export default {
   name: "TitleBar",
   setup() {
-    const appName = pkg.name;
-    const appVer = pkg.version;
-    const author = pkg.author;
+    const appName = name;
+    const appVer = version;
+    const appAuthor = author;
 
     return {
       appName,
       appVer,
-      author
+      author: appAuthor
     };
   }
 };

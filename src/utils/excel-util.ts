@@ -1,18 +1,18 @@
 import TodoItem from "@/datastore/todoItem";
 import { Workbook, Worksheet } from "exceljs";
 import { Notification, shell } from "electron";
+import { name } from "../../package.json";
 
 import db from "@/datastore/datastore";
 import { getDateFormat, getSavePath } from "@/utils/common";
 
-const pkg = require("../../package.json");
 const ExcelJS = require("exceljs");
 
 function exportData(): void {
   const workbook: Workbook = new ExcelJS.Workbook();
 
   // 设置基本信息
-  workbook.creator = pkg.name;
+  workbook.creator = name;
 
   // 添加工作簿和标题
   const sheet: Worksheet = workbook.addWorksheet("todo list");
