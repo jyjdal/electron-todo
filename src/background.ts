@@ -4,7 +4,7 @@ import { app, protocol, BrowserWindow, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 
 import { exportData } from "@/utils/excel-util";
-import { setPosition } from "@/utils/init-extra";
+import { initTray, setPosition } from "@/utils/init-extra";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -32,7 +32,7 @@ if (app.requestSingleInstanceLock()) {
 app.commandLine.appendSwitch("wm-window-animations-disabled");
 
 async function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 300,
     height: 420,
     frame: false,
@@ -64,7 +64,8 @@ async function createWindow() {
   });
 
   setPosition(win);
-  win.show();
+  win.showInactive();
+  win.setAlwaysOnTop(true, "status");
 }
 
 // Quit when all windows are closed.
@@ -88,6 +89,7 @@ app.on("activate", () => {
 
 app.on("ready", async () => {
   await createWindow();
+  initTray(win);
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -122,5 +124,5 @@ ipcMain.handle("exportData", () => {
 });
 
 ipcMain.handle("close", () => {
-  app.exit(0);
+  win.hide();
 });

@@ -6,7 +6,7 @@
       style="padding: 10px 0;color: rgba(255, 255, 255, 0.6); font-weight: lighter"
     >
       <el-col :span="3">
-        <el-icon class="el-icon-document-add" @click="close"></el-icon>
+        <el-icon class="el-icon-document-add" @click="importData"></el-icon>
       </el-col>
       <el-col :span="3">
         <el-icon class="el-icon-document" @click="exportData"></el-icon>
@@ -45,6 +45,10 @@ export default {
     },
     close() {
       ipcRenderer.invoke("close");
+    },
+    importData() {
+      // 这里功能还没有做，先把函数原型写上来
+      alert("敬请期待");
     }
   }
 };
