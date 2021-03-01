@@ -23,8 +23,10 @@ export function getIcon(): NativeImage {
   );
 }
 
+let tray: Tray
+
 export function initTray(win: BrowserWindow) {
-  const tray: Tray = new Tray(getIcon());
+  tray = new Tray(getIcon());
   const contextMenu: Menu = Menu.buildFromTemplate([
     {
       label: "导入",
