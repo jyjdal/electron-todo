@@ -62,6 +62,8 @@
         top="5vh"
         :model-value="dialogOpen"
         :close-on-click-modal="false"
+        :append-to-body="true"
+        :show-close="false"
       >
         <el-input
           type="textarea"

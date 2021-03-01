@@ -23,7 +23,7 @@ export function getIcon(): NativeImage {
   );
 }
 
-let tray: Tray
+let tray: Tray;
 
 export function initTray(win: BrowserWindow) {
   tray = new Tray(getIcon());
